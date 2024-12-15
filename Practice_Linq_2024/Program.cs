@@ -46,14 +46,17 @@ namespace Practice_Linq_2024
         {
             //Query 1: Вивести всі матчі, які відбулися в Україні у 2012 році.
 
-            var selectedGames = games; // Корегуємо запит !!!
+            var selectedGames = games.Where(g => g.Country == "Ukraine" && g.Date.Year == 2012);
 
 
             // Перевірка
             Console.WriteLine("\n======================== QUERY 1 ========================");
 
             // див. приклад як має бути виведено:
-
+            foreach (var game in selectedGames)
+            {
+                Console.WriteLine($"{game.Date} {game.Home_team} - {game.Away_team}, Score:{game.Home_score} - {game.Away_score}, Country:{game.Country}");
+            }
 
         }
 
@@ -62,14 +65,14 @@ namespace Practice_Linq_2024
         {
             //Query 2: Вивести Friendly матчі збірної Італії, які вона провела з 2020 року.  
 
-            var selectedGames = games; // Корегуємо запит !!!
+             // Корегуємо запит !!!
 
 
             // Перевірка
             Console.WriteLine("\n======================== QUERY 2 ========================");
 
             // див. приклад як має бути виведено:
-
+           
 
         }
 
@@ -78,14 +81,18 @@ namespace Practice_Linq_2024
         {
             //Query 3: Вивести всі домашні матчі збірної Франції за 2021 рік, де вона зіграла у нічию.
 
-            var selectedGames = games;   // Корегуємо запит !!!
+            var selectedGames = games.Where(g => (g.Home_team == "France" && g.Away_score == g.Home_score && g.Date.Year == 2021 && g.Country =="France"));  // Корегуємо запит !!!
+
 
             // Перевірка
             Console.WriteLine("\n======================== QUERY 3 ========================");
 
             // див. приклад як має бути виведено:
 
-
+            foreach (var game in selectedGames)
+            {
+                Console.WriteLine($"{game.Date} {game.Home_team} - {game.Away_team}, Score:{game.Home_score} - {game.Away_score}, Country:{game.Country}");
+            }
         }
 
         // Запит 4
