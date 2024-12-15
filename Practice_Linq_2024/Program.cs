@@ -55,7 +55,7 @@ namespace Practice_Linq_2024
             // див. приклад як має бути виведено:
             foreach (var game in selectedGames)
             {
-                Console.WriteLine($"{game.Date} {game.Home_team} - {game.Away_team}, Score:{game.Home_score} - {game.Away_score}, Country:{game.Country}");
+                Console.WriteLine($"{game.Date.ToShortDateString()} {game.Home_team} - {game.Away_team}, Score:{game.Home_score} - {game.Away_score}, Country:{game.Country}");
             }
 
         }
@@ -65,15 +65,18 @@ namespace Practice_Linq_2024
         {
             //Query 2: Вивести Friendly матчі збірної Італії, які вона провела з 2020 року.  
 
-             // Корегуємо запит !!!
+            var selectedGames = games.Where(g => g.Tournament == "Friendly" && (g.Away_team == "Italy" || g.Home_team == "Italy") && g.Date.Year >= 2020);// Корегуємо запит !!!
 
 
             // Перевірка
             Console.WriteLine("\n======================== QUERY 2 ========================");
 
             // див. приклад як має бути виведено:
-           
 
+            foreach (var game in selectedGames)
+            {
+                Console.WriteLine($"{game.Date.ToShortDateString()} {game.Home_team} - {game.Away_team}, Score:{game.Home_score} - {game.Away_score}, Country:{game.Country}");
+            }
         }
 
         // Запит 3
@@ -81,7 +84,7 @@ namespace Practice_Linq_2024
         {
             //Query 3: Вивести всі домашні матчі збірної Франції за 2021 рік, де вона зіграла у нічию.
 
-            var selectedGames = games.Where(g => (g.Home_team == "France" && g.Away_score == g.Home_score && g.Date.Year == 2021 && g.Country =="France"));  // Корегуємо запит !!!
+            // Корегуємо запит !!!
 
 
             // Перевірка
@@ -89,10 +92,7 @@ namespace Practice_Linq_2024
 
             // див. приклад як має бути виведено:
 
-            foreach (var game in selectedGames)
-            {
-                Console.WriteLine($"{game.Date} {game.Home_team} - {game.Away_team}, Score:{game.Home_score} - {game.Away_score}, Country:{game.Country}");
-            }
+            
         }
 
         // Запит 4
