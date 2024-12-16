@@ -187,7 +187,7 @@ namespace Practice_Linq_2024
                                              MatchYear = g.Date.Year,
                                              Game = $"{g.Home_team} - {g.Away_team}",
                                              Result = g.Home_score+g.Away_score,
-                                         }); ;   // Корегуємо запит !!!
+                                         });   // Корегуємо запит !!!
 
             // Перевірка
             Console.WriteLine("\n======================== QUERY 8 ========================");
@@ -196,7 +196,7 @@ namespace Practice_Linq_2024
 
             foreach (var game in selectedGames)
             {
-                Console.WriteLine($"{game.MatchYear} {game.Game}, Goals:({game.Result})");
+                Console.WriteLine($"{game.MatchYear} {game.Game}, Goals:{game.Result}");
             }
         }
 
@@ -207,13 +207,24 @@ namespace Practice_Linq_2024
             //Query 9: Перетворити всі матчі UEFA Nations League у 2023 році на матчі з наступними властивостями:
             // MatchYear - рік матчу, Game - назви обох команд через дефіс (першою - Home_team), Result - результат для першої команди (Win, Loss, Draw)
 
-            var selectedGames = games;   // Корегуємо запит !!!
+            var selectedGames = games.Where(g=>g.Tournament=="UEFA Nations League"&& g.Date.Year == 2023).Select(g => new
+            {
+                MatchYear = g.Date.Year,
+                Game = $"{g.Home_team} - {g.Away_team}",
+                Result = g.Home_score > g.Away_score ? "Win" :
+                g.Home_score < g.Away_score ? "Loss" :
+                "Draw"
+            });   // Корегуємо запит !!!
 
             // Перевірка
             Console.WriteLine("\n======================== QUERY 9 ========================");
 
             // див. приклад як має бути виведено:
 
+            foreach (var game in selectedGames)
+            {
+                Console.WriteLine($"{game.MatchYear} {game.Game}, Result for team1:{game.Result}");
+            }
 
         }
 
