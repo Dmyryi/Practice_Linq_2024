@@ -185,8 +185,8 @@ namespace Practice_Linq_2024
                                          .Select(g => new
                                          {
                                              MatchYear = g.Date.Year,
-                                             Game = $"{g.Home_team} - {g.Away_team}",
-                                             Result = g.Home_score+g.Away_score,
+                                             Team1 = $"{g.Home_team}",Team2=$"{g.Away_team}",
+                                             Goals = g.Home_score+g.Away_score,
                                          });   // Корегуємо запит !!!
 
             // Перевірка
@@ -196,7 +196,7 @@ namespace Practice_Linq_2024
 
             foreach (var game in selectedGames)
             {
-                Console.WriteLine($"{game.MatchYear} {game.Game}, Goals:{game.Result}");
+                Console.WriteLine($"{game.MatchYear} {game.Team1}-{game.Team2}, Goals:{game.Goals}");
             }
         }
 
@@ -232,14 +232,19 @@ namespace Practice_Linq_2024
         static void Query10(List<FootballGame> games)
         {
             //Query 10: Вивести з 5-го по 10-тий (включно) матчі Gold Cup, які відбулися у липні 2023 р.
+            var selectedGames = games
+                .Where(g => g.Tournament == "Gold Cup" && g.Date.Year == 2023 && g.Date.Month == 7) // Filter by Gold Cup and July 2023
+                .Skip(4)  // Skip the first 4 games (0-based index, so this starts at the 5th game)
+                .Take(6);
+            // Take the next 6 games (which will give us the 5th to 10th matches)
 
-            var selectedGames = games;    // Корегуємо запит !!!
+    // Перевірка
+    Console.WriteLine("\n======================== QUERY 10 ========================");
 
-            // Перевірка
-            Console.WriteLine("\n======================== QUERY 10 ========================");
-
-            // див. приклад як має бути виведено:
-
+            foreach (var game in selectedGames)
+            {
+                Console.WriteLine($"{game.Date.ToShortDateString()} {game.Home_team} - {game.Away_team}, Score: {game.Home_score} - {game.Away_score}, Country: {game.Country}");
+            }
 
         }
 
